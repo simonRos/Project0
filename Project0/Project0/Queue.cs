@@ -32,15 +32,8 @@ namespace Project0
         {
             return (Job)List[index];
         }
-        //
-        public void Wait()
-        {
-            for (int lcv = 0; lcv < Count; lcv++)
-            {
-                this.Item(lcv).Wait();
-            }
-        }
-        public void Wait(int waitTime)
+        //wait
+        public void Wait(int waitTime = 1)
         {
             for (int lcv = 0; lcv < Count; lcv++)
             {

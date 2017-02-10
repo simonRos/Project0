@@ -40,22 +40,12 @@ namespace Project0
             this.ID = lastID;
         }
         //wait
-        public void Wait()
-        {
-            timeWaiting++;
-        }
-        public void Wait(int timeWaiting)
+        public void Wait(int timeWaiting = 1)
         {
             this.timeWaiting += timeWaiting;
         }
         //work
-        public void Work()
-        {
-            timeWorked++;
-            timeRemaining--;
-            CheckDone();
-        }
-        public void Work(int timeWorked)
+        public void Work(int timeWorked = 1)
         {
             this.timeWorked += timeWorked;
             timeRemaining -= timeWorked;
