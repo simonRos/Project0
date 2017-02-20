@@ -1,83 +1,71 @@
-﻿/**
- * Operating Systems - Project0
- * 
- * Written by Simon Rosner, Petro Sokirniy, Taylor Hohenstein, Timothy Benson
- * 2/28/17
- */
+﻿//Object representing simple system job
+//Written by Simon Rosner
+// v1.0.2
 
-using System.Threading;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Project0
 {
-    /// <summary>
-    /// Represents a simple system job.
-    /// </summary>
     class Job
     {
-        private static int _intanceCount;
+        public static int lastID = 0;           //class variable for last ID
+        public int ID { get; set; }             //instance variable for ID
+        public int timeStarted { get; set; }    //time job was created
+        public int timeEnded { get; set; }      //time job ended
+        public int timeWaiting { get; set; }    //time job has been waiting
+        public int timeWorked { get; set; }     //time spent being worked
+        public int timeNeeded { get; set; }     //time required to complete job
+        public int timeRemaining { get; set; }  //time remaining until completion
+        public bool complete { get; set; }      //has the job finished?
 
-
-        /// <param name="timeRequired">The time required to complete the job.</param>
-        /// <param name="createdTimestamp">The timestamp when the the job was created.</param>
-        public Job(int timeRequired, int createdTimestamp)
+        //constructor
+        public Job(int timeNeeded, int timeStarted)
         {
-            // Set times
-            TimeRequired = timeRequired;
-            CreatedTimestamp = createdTimestamp;
-            CompletedTimestamp = -1;
-            TimeSpentWaiting = 0;
-            TimeSpentWorking = 0;
-
-            // Set ID
-            Id = Interlocked.Increment(ref _intanceCount); // thread-safe update+access
-
-            // Set IsComplete
-            CheckIfComplete();
+            //set times
+            this.timeNeeded = timeNeeded;
+            timeRemaining = timeNeeded;
+            this.timeStarted = timeStarted;
+            timeWaiting = 0;
+            timeWorked = 0;
+            timeEnded = -1;
+            //set complete
+            CheckDone();
+            //set IDs
+            lastID++;
+            this.ID = lastID;
         }
 
-
-        public int TimeRequired { get; set; }
-        public int CreatedTimestamp { get; set; }
-        public int CompletedTimestamp { get; set; }
-        public int TimeSpentWaiting { get; set; }
-        public int TimeSpentWorking { get; set; }
-        public int Id { get; }
-        public bool IsComplete { get; set; }
-
-
-        private void CheckIfComplete()
+        //wait
+        public void Wait(int timeWaiting = 1)
         {
-            if (TimeSpentWorking >= TimeRequired)
+            this.timeWaiting += timeWaiting;
+        }
+
+        //work
+        public void Work(int timeWorked = 1)
+        {
+            this.timeWorked += timeWorked;
+            timeRemaining -= timeWorked;
+            CheckDone();
+        }
+
+        //is the job complete
+        private void CheckDone()
+        {
+            if (timeRemaining <= 0)
             {
-                IsComplete = true;
-                CompletedTimestamp = CreatedTimestamp + TimeSpentWorking + TimeSpentWaiting;
+                complete = true;
+                timeEnded = timeStarted + timeWorked + timeWaiting;
             }
             else
             {
-                IsComplete = false;
+                complete = false;
             }
-        }
-
-        public void AddWaitTime(int waitTime = 1)
-        {
-            TimeSpentWaiting += waitTime;
-        }
-
-        public void AddWorkTime(int workTime = 1)
-        {
-            TimeSpentWorking += workTime;
-            CheckIfComplete();
-        }
-
-        public override string ToString()
-        {
-            return $"Id: {Id}\n" +
-                   $"TimeRequired: {TimeRequired}\n" +
-                   $"CreatedTimestamp: {CreatedTimestamp}\n" +
-                   $"CompletedTimestamp: {CompletedTimestamp}\n" +
-                   $"TimeSpentWaiting: {TimeSpentWaiting}\n" +
-                   $"TimeSpentWorking: {TimeSpentWorking}\n" +
-                   $"IsComplete: {IsComplete}";
         }
     }
 }
