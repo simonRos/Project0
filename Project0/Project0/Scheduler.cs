@@ -14,7 +14,7 @@ namespace Project0
 
         //Instance Variables
         private Queue jobQueue;
-        private Queue jobComplete;
+        public Queue jobComplete;
         private Job lastJob = null;
         private int switchTime;
         private int jobRunTime;
@@ -24,6 +24,7 @@ namespace Project0
         {
             this.jobQueue = jobQueue;
             this.switchTime = switchTime;
+            this.jobRunTime = jobRunTime;
             jobComplete = new Queue();
         }
 
@@ -40,7 +41,7 @@ namespace Project0
             {
                 jobQueue.Add(lastJob);
             }
-            else
+            else if (lastJob != null)
             {
                 jobComplete.Add(lastJob);
                 if (jobQueue.Count == 0)

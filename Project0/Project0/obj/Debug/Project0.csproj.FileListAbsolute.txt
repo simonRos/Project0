@@ -1,2 +1,5 @@
 c:\users\zero\documents\visual studio 2013\Projects\Project0\Project0\bin\Debug\Project0.exe.config
-C:\Users\Zero\Documents\Visual Studio 2013\Projects\Project0\Project0\obj\Debug\Project0.csprojResolveAssemblyReference.cache
+C:\Users\Zero\Documents\Visual Studio 2013\Projects\Project0\Project0\bin\Debug\Project0.exe
+C:\Users\Zero\Documents\Visual Studio 2013\Projects\Project0\Project0\bin\Debug\Project0.pdb
+C:\Users\Zero\Documents\Visual Studio 2013\Projects\Project0\Project0\obj\Debug\Project0.exe
+C:\Users\Zero\Documents\Visual Studio 2013\Projects\Project0\Project0\obj\Debug\Project0.pdb
