@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,8 @@ namespace Project0
     {
         static void Main(string[] args)
         {
+            String inPath = "..\\..\\input.txt";
+            String outPath = "..\\..\\output.txt";
             int jobsCreated = 50;
             int switchTime = 2;
             int runTime = 10;
@@ -22,21 +25,32 @@ namespace Project0
 
             Queue jobQueue = new Queue();
 
-            foreach (int i in timeNeeded)
+            using (StreamReader reader = File.OpenText(inPath))
             {
-                jobQueue.Add(new Job(i, 0));
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    jobQueue.Add(new Job(Convert.ToInt32(line), 0));
+                }
             }
 
             Scheduler sched = new Scheduler(jobQueue, switchTime, runTime);
             OperatingSystem os = new OperatingSystem(new CPU(), sched);
             os.RunMachine();
 
-            foreach (Job job in sched.jobComplete)
+            if (!File.Exists(outPath))
             {
-                Console.WriteLine((job.timeWorked + job.timeRemaining) + "\t\t" + job.timeWaiting 
-                    + "\t\t" + job.timeEnded);
+                // Create a file to write to.
+                using (StreamWriter writer = File.CreateText(outPath))
+                {
+                    writer.WriteLine("Time worked \t Time waiting \t Time Ended");
+                    foreach (Job job in sched.jobComplete)
+                    {
+                        writer.WriteLine((job.timeWorked + job.timeRemaining) + "\t\t" + job.timeWaiting
+                            + "\t\t" + job.timeEnded);
+                    }
+                }
             }
-
 
         }
     }
