@@ -11,42 +11,47 @@ using System.Threading.Tasks;
 
 namespace Project0
 {
+    //Job - Represents a process that will be put into
+    //a queue and ran through the CPU.
     class Job
     {
-        public static int lastID = 0;           //class variable for last ID
-        public int ID { get; set; }             //instance variable for ID
-        public int timeStarted { get; set; }    //time job was created
-        public int timeEnded { get; set; }      //time job ended
-        public int timeWaiting { get; set; }    //time job has been waiting
-        public int timeWorked { get; set; }     //time spent being worked
-        public int timeNeeded { get; set; }     //time required to complete job
-        public int timeRemaining { get; set; }  //time remaining until completion
-        public bool complete { get; set; }      //has the job finished?
+        //*****VARIABLES*****
+        public static int lastID = 0;           //Class Variable For Last ID
+        public int ID { get; set; }             //Instance Variable For ID
+        public int timeStarted { get; set; }    //Time Job Was Created
+        public int timeEnded { get; set; }      //Time Job Was Ended
+        public int timeWaiting { get; set; }    //Time Job Has Waiting
+        public int timeWorked { get; set; }     //Time Job Has Worked
+        public int timeNeeded { get; set; }     //Time Required To Complete Job
+        public int timeRemaining { get; set; }  //Time Remaining Until Completion
+        public bool complete { get; set; }      //Job Finished?
 
-        //constructor
+        //*****CONSTRUCTORS*****
         public Job(int timeNeeded, int timeStarted)
         {
-            //set times
+            //Set Times
             this.timeNeeded = timeNeeded;
             timeRemaining = timeNeeded;
             this.timeStarted = timeStarted;
             timeWaiting = 0;
             timeWorked = 0;
             timeEnded = -1;
-            //set complete
+            //Set Complete
             CheckDone();
-            //set IDs
+            //Set IDs
             lastID++;
             this.ID = lastID;
         }
 
-        //wait
+        //Wait
         public void Wait(int timeWaiting = 1)
         {
             this.timeWaiting += timeWaiting;
         }
 
-        //work
+        //*****METHODS*****
+
+        //Work
         public void Work(int timeWorked = 1)
         {
             this.timeWorked += timeWorked;
@@ -54,7 +59,7 @@ namespace Project0
             CheckDone();
         }
 
-        //is the job complete
+        //Checks If Job Is Complete
         private void CheckDone()
         {
             if (timeRemaining <= 0)

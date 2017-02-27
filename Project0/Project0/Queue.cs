@@ -10,13 +10,21 @@ using System.Threading.Tasks;
 
 namespace Project0
 {
+    //Queue - List of Jobs, Jobs may be added or removed from 
+    //the queue depending on if they are complete. Job may 
+    //also be referenced by getting index of said job.
     class Queue : System.Collections.CollectionBase
     {
-        public void Add(Job job)    //Add job
+        //*****METHODS*****
+
+        //Add Job To Queue
+        public void Add(Job job)
         {
             List.Add(job);
         }
-        public bool Remove(int index)   //Remove job
+        
+        //Remove Job To Queue
+        public bool Remove(int index)
         {
             if (index > Count - 1 || index < 0)
             {
@@ -28,11 +36,14 @@ namespace Project0
                 return true;
             }
         }
-        public Job Item(int index) //Reference a job
+
+        //Referance A Job From Queue
+        public Job Item(int index)
         {
             return (Job)List[index];
         }
-        //wait
+
+        //Wait
         public void Wait(int waitTime = 1)
         {
             for (int lcv = 0; lcv < Count; lcv++)

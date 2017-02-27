@@ -6,17 +6,23 @@ using System.Threading.Tasks;
 
 namespace Project0
 {
+    //Operating System - 
     class OperatingSystem
     {
+        //*****VARIABLES*****
         CPU cpu;
         IScheduler scheduler;
 
+        //*****CONSTRUCTORS*****
         public OperatingSystem(CPU cpu, IScheduler sched)
         {
             this.cpu = cpu;
             this.scheduler = sched;
         }
 
+        //*****METHODS*****
+
+        //Run Machine - Runs CPU and Scheduler
         public void RunMachine()
         {
             while (true)

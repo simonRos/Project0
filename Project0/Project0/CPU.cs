@@ -6,21 +6,22 @@ using System.Threading.Tasks;
 
 namespace Project0
 {
+    //CPU - "Runs" Jobs.
     class CPU
     {
-        //Instance Variables
-        int runTime;
+        //*****VARIABLES*****
+        int runTime; //Amount of Time on CPU
 
-        //Constructor
+        //*****CONSTRUCTORS*****
         public CPU(int runTime = 0)
         {
             this.runTime = runTime;
         }
 
-        //Methods
+        //*****METHODS*****
 
-        //Run simulates the amount of time a job in on the CPU
-        //it returns the amount of excess time given to the job
+        //Run - Simulates the amount of time a job on the CPU
+        //and returns the amount of excess time given to the job
         public int Run(Job job)
         {
             return Run(job, runTime);
@@ -33,6 +34,5 @@ namespace Project0
                 return Math.Abs(job.timeRemaining);
             return 0;
         }
-
     }
 }
