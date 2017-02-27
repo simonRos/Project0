@@ -56,16 +56,16 @@ namespace Project0
             os.RunMachine(); //Runs CPU + Scheduler
 
             //*****CREATE TEXT FILE + WRITE TO TEXT FILE*****
-            if (!File.Exists(outPath))
+            if (File.Exists(outPath))
             {
                 using (StreamWriter writer = File.CreateText(outPath))
                 {
-                    writer.WriteLine("ID \t Time worked \t Time waiting \t Time Ended"); //Simple Header
+                    writer.WriteLine("ID \t Time Worked \t Time Needed \t Time Waiting \t Time Started \t Time Ended"); //Simple Header
                     //Write Times For Jobs
                     foreach (Job job in sched.jobComplete)
                     {
-                        writer.WriteLine((job.timeWorked + job.timeRemaining) + "\t\t" + job.timeWaiting
-                            + "\t\t" + job.timeEnded);
+                        writer.WriteLine(job.ID + "\t\t" + (job.timeWorked + job.timeRemaining) + "\t\t" + job.timeNeeded + "\t\t" + job.timeWaiting + 
+                            "\t\t" + job.timeStarted + "\t\t" + job.timeEnded);
                     }
                 }
             }

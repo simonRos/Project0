@@ -30,9 +30,9 @@ namespace Project0
                 Job job = scheduler.NextJob();
                 if (job == null)
                     break;
-
-                cpu.Run(job, scheduler.JobRunTime);
-                scheduler.Wait(scheduler.JobRunTime);
+                Console.WriteLine("Job ID: {0} \t Time Started: {1}", job.ID, job.timeWaiting);
+                int wastedTime = cpu.Run(job, scheduler.JobRunTime);
+                scheduler.Wait(scheduler.JobRunTime - wastedTime);
             }
         }
 
