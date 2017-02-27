@@ -27,45 +27,46 @@ namespace Project0
         static void Main(string[] args)
         {
             //*****VARIABLES*****
-            String inPath = "..\\..\\input.txt";   //Input.txt
-            String outPath = "..\\..\\output.txt"; //Output.txt
-            int jobsCreated = 50;                  //Amount of Jobs
-            int switchTime = 2;                    //Amount of Time It Takes To Switch Jobs
-            int runTime = 10;                      //Amount of Time on CPU
-            Queue jobQueue = new Queue();          //Queue For Jobs
-            //Array of Job Tims
-            int[] timeNeeded = {22,46,10,42,57,27,35,36,42,5,
-                60,16,34,16,17,1,26,35,6,12,24,15,11,
-                23,49,45,53,51,46,21,46,16,15,
-                23,55,53,23,8,20,56,18,17,58,
-                25,54,34,54,5,3,5};
+            String inPath = "..\\..\\input.txt"; //Input.txt
+            String outPath = "..\\..\\output";   //Output.txt
+            int switchTime = 2;                  //Amount of Time It Takes To Switch Jobs
 
-            //*****READS JOBS FROM TEXT FILE*****
-            using (StreamReader reader = File.OpenText(inPath))
+            Console.Write("Please Enter Maximum RunTime: ");
+            string input = Console.ReadLine();
+            int maxRunTime = 0;
+            if (int.TryParse(input, out maxRunTime))
             {
-                string line;
-                while ((line = reader.ReadLine()) != null)
+                for (int runTime = 1; runTime <= maxRunTime; runTime++) //Do Not Start From 0!!!
                 {
-                    jobQueue.Add(new Job(Convert.ToInt32(line), 0));
-                }
-            }
+                    Console.WriteLine("***Runtime {0}***", runTime);
+                    Job.lastID = 0;
+                    Queue jobQueue = new Queue(); //Queue For Jobs
 
-            //*****RUN OPERATING SYSTEM*****
-            Scheduler sched = new Scheduler(jobQueue, switchTime, runTime); //Creation of Scheduler
-            OperatingSystem os = new OperatingSystem(new CPU(), sched);     //Creation of OperatingSystem
-            os.RunMachine(); //Runs CPU + Scheduler
-
-            //*****CREATE TEXT FILE + WRITE TO TEXT FILE*****
-            if (File.Exists(outPath))
-            {
-                using (StreamWriter writer = File.CreateText(outPath))
-                {
-                    writer.WriteLine("ID \t Time Worked \t Time Needed \t Time Waiting \t Time Started \t Time Ended"); //Simple Header
-                    //Write Times For Jobs
-                    foreach (Job job in sched.jobComplete)
+                    //*****READS JOBS FROM TEXT FILE*****
+                    using (StreamReader reader = File.OpenText(inPath))
                     {
-                        writer.WriteLine(job.ID + "\t\t" + (job.timeWorked + job.timeRemaining) + "\t\t" + job.timeNeeded + "\t\t" + job.timeWaiting + 
-                            "\t\t" + job.timeStarted + "\t\t" + job.timeEnded);
+                        string line;
+                        while ((line = reader.ReadLine()) != null)
+                        {
+                            jobQueue.Add(new Job(Convert.ToInt32(line), 0));
+                        }
+                    }
+
+                    //*****RUN OPERATING SYSTEM*****
+                    Scheduler sched = new Scheduler(jobQueue, switchTime, runTime); //Creation of Scheduler
+                    OperatingSystem os = new OperatingSystem(new CPU(), sched);     //Creation of OperatingSystem
+                    os.RunMachine(); //Runs CPU + Scheduler
+
+                    //*****CREATE TEXT FILE + WRITE TO TEXT FILE*****
+                    using (StreamWriter writer = File.CreateText(outPath + runTime + ".txt"))
+                    {
+                        writer.WriteLine("ID \t Time Worked \t Time Needed \t Time Waiting \t Time Started \t Time Ended"); //Simple Header
+                        //Write Times For Jobs
+                        foreach (Job job in sched.jobComplete)
+                        {
+                            writer.WriteLine(job.ID + "\t\t" + (job.timeWorked + job.timeRemaining) + "\t\t" + job.timeNeeded + "\t\t" + job.timeWaiting +
+                                "\t\t" + job.timeStarted + "\t\t" + job.timeEnded);
+                        }
                     }
                 }
             }

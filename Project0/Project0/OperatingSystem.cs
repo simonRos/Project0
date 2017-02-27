@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Project0
 {
-    //Operating System - 
+    //Operating System - Controller class for the simulation.
     class OperatingSystem
     {
         //*****VARIABLES*****
@@ -30,9 +30,10 @@ namespace Project0
                 Job job = scheduler.NextJob();
                 if (job == null)
                     break;
-                Console.WriteLine("Job ID: {0} \t Time Started: {1}", job.ID, job.timeWaiting);
+                Console.WriteLine("Job ID: {0} \t Time Started: {1}", job.ID, job.timeWaiting + job.timeWorked);
                 int wastedTime = cpu.Run(job, scheduler.JobRunTime);
                 scheduler.Wait(scheduler.JobRunTime - wastedTime);
+                Console.WriteLine("Job ID: {0} \t Time Ended: {1}", job.ID, job.timeWaiting + job.timeWorked);
             }
         }
 
