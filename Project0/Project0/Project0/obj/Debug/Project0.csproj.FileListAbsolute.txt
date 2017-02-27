@@ -12,3 +12,15 @@ C:\Users\Timothy\Desktop\Project0-master\Project0\Project0\obj\Debug\Project0.cs
 C:\Users\Timothy\Desktop\Project0-master (With Comments!)\Project0\Project0\bin\Debug\Project0.exe.config
 C:\Users\Timothy\Desktop\Project0-master (With Comments!)\Project0\Project0\obj\Debug\Project0.exe
 C:\Users\Timothy\Desktop\Project0-master (With Comments!)\Project0\Project0\obj\Debug\Project0.pdb
+C:\Users\Timothy\Desktop\Project0\Project0\Project0\bin\Debug\Project0.exe.config
+C:\Users\Timothy\Desktop\Project0\Project0\Project0\obj\Debug\Project0.exe
+C:\Users\Timothy\Desktop\Project0\Project0\Project0\obj\Debug\Project0.pdb
+C:\Users\Timothy\Desktop\Project0\Project0\Project0\bin\Debug\Project0.exe
+C:\Users\Timothy\Desktop\Project0\Project0\Project0\bin\Debug\Project0.pdb
+C:\Users\Timothy\Desktop\Project0\Project0\Project0\obj\Debug\Project0.csprojResolveAssemblyReference.cache
+C:\Users\Timothy\Desktop\Project0\Project0\bin\Debug\Project0.exe.config
+C:\Users\Timothy\Desktop\Project0\Project0\obj\Debug\Project0.exe
+C:\Users\Timothy\Desktop\Project0\Project0\obj\Debug\Project0.pdb
+C:\Users\Timothy\Desktop\Project0\Project0\bin\Debug\Project0.exe
+C:\Users\Timothy\Desktop\Project0\Project0\bin\Debug\Project0.pdb
+C:\Users\Timothy\Desktop\Project0\Project0\obj\Debug\Project0.csprojResolveAssemblyReference.cache
